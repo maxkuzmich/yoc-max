@@ -21,7 +21,7 @@ class CityController extends FOSRestController
 
 
     /**
-     * Lists all Movies.
+     * Lists all Cities.
      * @Rest\Get("/cities")
      *
      * @param Request $request

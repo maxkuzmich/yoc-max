@@ -3,35 +3,65 @@
 namespace App\Controller;
 
 use App\Entity\Country;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class CountryController extends AbstractController
+/**
+ * Product controller.
+ * @Route("/api", name="api_")
+ */
+class CountryController extends FOSRestController
 {
     /**
-     * @Route("/country", name="country")
+     * Lists all Countries.
+     * @Rest\Get("/")
+     *
+     * @param Request $request
+     * @return Response
      */
-//    public function index()
-//    {
-//        return $this->json([
-//            'message' => 'Welcome to your new controller!',
-//            'path' => 'src/Controller/CountryController.php',
-//        ]);
-//    }
+    public function defaultAction(Request $request)
+    {
+        return '{"hello":"word!"}';
+    }
+    /**
+     * Lists all Countries.
+     * @Rest\Get("/country")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function getCitiesAction(Request $request)
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Country::class);
+        $cities = $repository->findall();
+        return $this->handleView($this->view($cities));
+    }
 
     /**
-     * @Route("/country", name="create_country")
+     * @Rest\Post("/country/")
+     * @param Request $request
+     * @return Response
      */
-    public function createCountry(): Response
+    public function postAction(Request $request)
     {
+        $name = $request->get('name');
+        $code = $request->get('code');
+        if(empty($name) || empty($code))
+        {
+            return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
+        }
         // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
         $country = new Country();
-        $country->setName('Spain');
-        $country->setCode("ES");
+        $country->setName($name);
+        $country->setCode($code);
 
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
@@ -40,42 +70,7 @@ class CountryController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        return new Response('Saved new country with id '.$country->getId());
+        return new View("Country was added Successfully", Response::HTTP_OK);
     }
 
-    /**
-     * @Route("/country/{id}", name="country_show")
-     */
-//    public function show($id)
-//    {
-//        $country = $this->getDoctrine()
-//            ->getRepository(Country::class)
-//            ->find($id);
-//
-//        if (!$country) {
-//            throw $this->createNotFoundException(
-//                'No country found for id '.$id
-//            );
-//        }
-//
-//        return new Response('Check out this great country: '.$country->getName());
-//
-//        // or render a template
-//        // in the template, print things with {{ country.name }}
-//        // return $this->render('country/show.html.twig', ['country' => $country]);
-//    }
-
-    /**
-     * @Route("/country/all", name="country_show_all")
-     */
-    public function getListOfCounties():Response
-    {
-        $repository = $this->getDoctrine()->getRepository(Country::class);
-
-        $countries = $repository->findAll();
-        print_r($countries);die;
-        $response = new Response(serialize($countries));
-        $response->headers->set('Content-Type', 'application/json');
-
-    }
 }
