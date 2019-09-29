@@ -36,6 +36,7 @@ http://localhost:8000/api/country/?name=UKRANE&code=UA
 <br></br>
 <b>GET</b>(get all countries)
 http://localhost:8000/api/country
-//======================================================
+//==================GET REPORT==========================
+<br></br>
 <b>REPORT API</b>
 http://localhost:8000/api/report/?start_date=2018-06-16&end_date=2018-06-17&less=15&higher=11
