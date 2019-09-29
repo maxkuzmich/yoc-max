@@ -36,6 +36,7 @@ http://localhost:8000/api/country/?name=UKRANE&code=UA
 <br></br>
 <b>GET</b>(get all countries)
 http://localhost:8000/api/country
+<br></br>
 //==================GET REPORT==========================
 <br></br>
 <b>REPORT API</b>
