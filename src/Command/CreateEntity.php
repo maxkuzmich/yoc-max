@@ -60,9 +60,6 @@ class CreateEntity extends Command
 
         $entity=$input->getArgument('entityName');
 
-
-
-
         if($input->getArgument('entityName')=='city') {
             $output->writeln($this->createCity($output));
         }else{
@@ -79,7 +76,8 @@ class CreateEntity extends Command
 
     private function createCity($output)
     {
-        $json = file_get_contents('https://yoc-media.github.io/weather/report/DE/Berlin.json');
+        $dataProviderUrl =$this->container->getParameter('data_provider');
+        $json = file_get_contents($dataProviderUrl);
         $dataProvider=json_decode($json,true);
         $entityManager = $this->container->get('doctrine')->getManager();
         foreach($dataProvider as $cityItem)
