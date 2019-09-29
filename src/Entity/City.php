@@ -36,6 +36,11 @@ class City
      */
     private $data;
 
+    private $temp;
+    private $minTemp;
+    private $maxTemp;
+    private $dateTime;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,30 @@ class City
     public function setData(string $data): self
     {
         $this->data = $data;
+
+        return $this;
+    }
+    public function setTemp(string $temp): self
+    {
+        $this->temp = $temp;
+
+        return $this;
+    }
+    public function setMinTemp(string $minTemp): self
+    {
+        $this->minTemp = $minTemp;
+
+        return $this;
+    }
+    public function setMaxTemp(string $maxTemp): self
+    {
+        $this->maxTemp = $maxTemp;
+
+        return $this;
+    }
+    public function setDateTime(string $dateTime): self
+    {
+        $this->dateTime = $dateTime;
 
         return $this;
     }

@@ -44,6 +44,13 @@ class CityController extends FOSRestController
         if ($singleresult === null) {
             return new View("City: id = ".$id." Not Found", Response::HTTP_NOT_FOUND);
         }
+        $data=json_decode($singleresult->getData(), true);
+
+        $singleresult->setTemp($data[0]['temp']);
+        $singleresult->setMinTemp($data[0]['min_temp']);
+        $singleresult->setMaxTemp($data[0]['max_temp']);
+        $singleresult->setDateTime($data[0]['datetime']);
+
         return $singleresult;
     }
 
@@ -117,6 +124,47 @@ class CityController extends FOSRestController
             $em->flush();
         }
         return new View("City ".$id." was deleted successfully", Response::HTTP_OK);
+    }
+    /**
+     * Lists all Cities.
+     * @Rest\Get("/report")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function getCitiesReportAction(Request $request)
+    {
+        $checkDateRange=false;
+        $checkTemp=false;
+        $repository = $this->getDoctrine()->getRepository(City::class);
+        $cities = $repository->findall();
+        $startDate=$request->get('start_date');
+        $endDate=$request->get('send_date');
+        if($startDate and $endDate)
+           $checkDateRange=true;
+        $less=$request->get('less');
+        $higher=$request->get('higher');
+        if($less and $higher)
+            $checkTemp=true;
+        foreach($cities as $key => $item)
+        {
+            $data=json_decode($item->getData(), true);
+            if(isset($data[0])) {
+                $item->setTemp($data[0]['temp']);
+                $item->setMinTemp($data[0]['min_temp']);
+                $item->setMaxTemp($data[0]['max_temp']);
+                $item->setDateTime($data[0]['datetime']);
+            }
+            if($checkDateRange){
+                if(strtotime($data[0]['datetime'])<strtotime($startDate) and strtotime($data[0]['datetime'])>strtotime($endDate))
+                    unset($cities[$key]);
+            }
+            if($checkTemp){
+                if($data[0]['temp']>$higher or $data[0]['temp']<$less)
+                    unset($cities[$key]);
+            }
+        }
+        return $this->handleView($this->view($cities));
     }
 
 }

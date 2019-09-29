@@ -1,3 +1,6 @@
+For set data provider use service.yaml
+parameters:
+    data_provider: https://yoc-media.github.io/weather/report/DE/Berlin.json
 1. For create country run:
 php bin/console app:create-entity country
 2. For create city run:
@@ -5,29 +8,34 @@ php bin/console app:create-entity city
 
 For get all country:
 http://localhost:8000/country/all
-
-REST API:
-DEFAULT
+<br></br>
+<b>REST API:</b>
+<b>DEFAULT</b>
 http://localhost:8000/api/   => "{\"hello\":\"word!\"}"
 //===================CITY================================
-GET
+<br></br>
+<b>GET</b>
 http://localhost:8000/api/cities
-
-GET CITY BY ID
+<br></br>
+<b>GET CITY BY ID</b>
 http://localhost:8000/api/cities/{id}
-
-POST(create new city)
+<br></br>
+<b>POST</b>(create new city)
 http://localhost:8000/api/cities/?name=BERLIN,timezone=Europe/Berlin&country=DE&data='{.....}'
-
-PUT(update city by id) 
+<br></br>
+<b>PUT</b>(update city by id) 
 http://localhost:8000/api/cities/{id}/?name=BERLIN,timezone=Europe/Berlin&country=DE&data='{.....}'
-
-DELETE
+<br></br>
+<b>DELETE</b>
 http://localhost:8000/api/city/{id}
-
-//===================COUNTRY=================
-POST(create new country)
+<br></br>
+//===================COUNTRY=============================
+<br></br>
+<b>POST(create new country)
 http://localhost:8000/api/country/?name=UKRANE&code=UA
-
-GET(get all countries)
+<br></br>
+<b>GET</b>(get all countries)
 http://localhost:8000/api/country
+//======================================================
+<b>REPORT API</b>
+http://localhost:8000/api/report/?start_date=2018-06-16&end_date=2018-06-17&less=15&higher=11
