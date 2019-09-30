@@ -6,8 +6,7 @@ php bin/console app:create-entity country
 2. For create city run:
 php bin/console app:create-entity city
 
-For get all country:
-http://localhost:8000/country/all
+
 <br></br>
 <b>REST API:</b>
 <b>DEFAULT</b>
@@ -41,3 +40,11 @@ http://localhost:8000/api/country
 <br></br>
 <b>REPORT API</b>
 http://localhost:8000/api/report/?start_date=2018-06-16&end_date=2018-06-17&less=15&higher=11
+<br></br>
+Optional parameters:
+<ul>
+<li>start_date</li>
+<li>end_date</li>
+<li>less</li>
+<li>higher</li>
+</ul>
