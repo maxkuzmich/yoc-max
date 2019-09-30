@@ -26,19 +26,19 @@ http://localhost:8000/api/cities/?name=BERLIN,timezone=Europe/Berlin&country=DE&
 http://localhost:8000/api/cities/{id}/?name=BERLIN,timezone=Europe/Berlin&country=DE&data='{.....}'
 <br></br>
 <b>DELETE</b>
-http://localhost:8000/api/city/{id}
+http://localhost:8000/api/cities/{id}
 <br></br>
 //===================COUNTRY=============================
 <br></br>
 <b>POST(create new country)
-http://localhost:8000/api/country/?name=UKRANE&code=UA
+http://localhost:8000/api/countries/?name=UKRANE&code=UA
 <br></br>
 <b>GET</b>(get all countries)
-http://localhost:8000/api/country
+http://localhost:8000/api/countries
 <br></br>
-//==================GET REPORT==========================
+//==================GET REPORT FOR CITY TEMPERATURE======
 <br></br>
-<b>REPORT API</b>
+<b>GET REPORT API</b>
 http://localhost:8000/api/report/?start_date=2018-06-16&end_date=2018-06-17&less=15&higher=11
 <br></br>
 Optional parameters:

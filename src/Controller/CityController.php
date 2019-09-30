@@ -109,7 +109,7 @@ class CityController extends FOSRestController
     }
 
     /**
-     * @Rest\Delete("/city/{id}")
+     * @Rest\Delete("/cities/{id}")
      */
     public function deleteAction($id)
     {

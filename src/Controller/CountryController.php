@@ -29,7 +29,7 @@ class CountryController extends FOSRestController
     }
     /**
      * Lists all Countries.
-     * @Rest\Get("/country")
+     * @Rest\Get("/countries")
      *
      * @param Request $request
      * @return Response
@@ -43,7 +43,7 @@ class CountryController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/country/")
+     * @Rest\Post("/countries/")
      * @param Request $request
      * @return Response
      */
